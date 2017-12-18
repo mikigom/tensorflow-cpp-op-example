@@ -9,21 +9,21 @@ import unittest
 import numpy as np
 import tensorflow as tf
 #import _inner_product_grad
-inner_product_module = tf.load_op_library('build/libinner_product.so')
+nms_module = tf.load_op_library('build/libnms.so')
 
 class InnerProductOpTest(unittest.TestCase):
     def test_raisesExceptionWithIncompatibleDimensions(self):
         with tf.Session(''):
             with self.assertRaises(ValueError):
-                inner_product_module.inner_product([1, 2], [[1, 2], [3, 4]]).eval()
+                nms_module.nms([1, 2], [[1, 2], [3, 4]]).eval()
             with self.assertRaises(ValueError):
-                self.assertRaises(inner_product_module.inner_product([1, 2], [1, 2, 3, 4]).eval(), ValueError)
+                self.assertRaises(nms_module.nms([1, 2], [1, 2, 3, 4]).eval(), ValueError)
             with self.assertRaises(ValueError):
-                self.assertRaises(inner_product_module.inner_product([1, 2, 3], [[1, 2], [3, 4]]).eval(), ValueError)
+                self.assertRaises(nms_module.nms([1, 2, 3], [[1, 2], [3, 4]]).eval(), ValueError)
             
     def test_innerProductHardCoded(self):
         with tf.Session(''):
-            result = inner_product_module.inner_product([[1], [2]], [[1, 2], [3, 4]]).eval()
+            result = nms_module.nms([[1], [2]], [[1, 2], [3, 4]]).eval()
             self.assertEqual(result.shape[0], 2)
             self.assertEqual(result[0], 5)
             self.assertEqual(result[1], 11)

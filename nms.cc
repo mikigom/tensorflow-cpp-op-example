@@ -1,4 +1,4 @@
-/// \file inner_product.cc
+/// \file nms.cc
 /// \author David Stutz
 /// \brief Implementation of a inner product (i.e. fully connected layer)
 /// operation in Tensorflow.
@@ -10,10 +10,10 @@
 
 using namespace tensorflow;
 
-REGISTER_OP("InnerProduct")
+REGISTER_OP("NMS")
   .Input("input: float")
   .Input("weights: float")
-  .Output("inner_product: float")
+  .Output("nms: float")
   .SetShapeFn([](::tensorflow::shape_inference::InferenceContext* c) {
     shape_inference::ShapeHandle input_shape;
     TF_RETURN_IF_ERROR(c->WithRank(c->input(0), 2, &input_shape));
@@ -35,11 +35,11 @@ REGISTER_OP("InnerProduct")
 /// \brief Implementation of an inner product operation.
 /// \param context
 /// \author David Stutz
-class InnerProductOp : public OpKernel {
+class NMSOp : public OpKernel {
 public:
   /// \brief Constructor.
   /// \param context
-  explicit InnerProductOp(OpKernelConstruction* context) : OpKernel(context) {
+  explicit NMSOp(OpKernelConstruction* context) : OpKernel(context) {
     
   }
   
@@ -91,4 +91,4 @@ public:
   }
 };
 
-REGISTER_KERNEL_BUILDER(Name("InnerProduct").Device(DEVICE_CPU), InnerProductOp);
+REGISTER_KERNEL_BUILDER(Name("NMS").Device(DEVICE_CPU), NMSOp);
