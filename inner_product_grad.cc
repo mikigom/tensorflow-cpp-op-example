@@ -1,3 +1,4 @@
+/*
 /// \file inner_product_grad.cc
 /// \author David Stutz
 /// \brief Implementation of the gradient of a inner product operation, see
@@ -83,3 +84,4 @@ public:
 };
 
 REGISTER_KERNEL_BUILDER(Name("InnerProductGrad").Device(DEVICE_CPU), InnerProductGradOp);
+*/

@@ -46,4 +46,3 @@ def _inner_product_grad(op, grad):
     grad_weights = tf.multiply(tf.transpose(grad), tf.reshape(tf.tile(tf.reshape(input_tensor, [input_rows]), [output_rows]), [output_rows, -1]))
     
     return [tf.transpose(grad_input), grad_weights]
-  

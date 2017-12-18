@@ -9,8 +9,3 @@ set(CMAKE_CXX_FLAGS "-std=c++11 -fPIC -D_GLIBCXX_USE_CXX11_ABI=0 ${CMAKE_CXX_FLA
 # build the actual operation which can be used directory
 include_directories(${Tensorflow_INCLUDE_DIRS})
 add_library(inner_product SHARED inner_product.cc)
-
-# build the gradient operation which is used in inner_product_grad.py
-# to register it
-include_directories(${Tensorflow_INCLUDE_DIRS})
-add_library(inner_product_grad SHARED inner_product_grad.cc)
